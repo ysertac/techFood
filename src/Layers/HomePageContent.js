@@ -90,7 +90,7 @@ const HomePageContent = () => {
               </div>
             ))}
           </div>
-          <div className="flex justify-between flex-wrap w-full my-16">
+          <div className="flex justify-between flex-wrap w-full my-16 mb-20">
             {dataHomePage.menuCards.map((item) => (
               <MenuCards item={item} />
             ))}
