@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import MenuCards from "../Components/MenuCards";
 
 import { dataHomePage } from "../Data";
@@ -7,12 +8,9 @@ const HomePageContent = () => {
     <>
       <section
         className={
-          "bg-[url('/src/Assets/mvp-banner.png')] h-[100vh] flex flex-col items-center pt-20 text-center"
+          "bg-[url('/src/Assets/mvp-banner.png')] h-[90vh] flex flex-col items-center pt-1 text-center"
         }
       >
-        <header>
-          <img src={dataHomePage.header.img} />
-        </header>
         <div className="flex flex-col mt-14 h-56 justify-between">
           <p className="text-specYellow font-satisfy text-2xl">
             fırsatı kaçırma
@@ -92,7 +90,9 @@ const HomePageContent = () => {
           </div>
           <div className="flex justify-between flex-wrap w-full my-16 mb-20">
             {dataHomePage.menuCards.map((item) => (
-              <MenuCards item={item} />
+              <NavLink className="w-[32%]" to={`/order/${item.id}`}>
+                <MenuCards item={item} />
+              </NavLink>
             ))}
           </div>
         </div>

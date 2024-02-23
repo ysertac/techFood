@@ -1,14 +1,14 @@
 import Footer from "../Layers/Footer";
 import Header from "../Layers/Header";
-import HomePageContent from "../Layers/HomePageContent";
+import OrderPageContent from "../Layers/OrderPageContent";
 
-const HomePage = () => {
+const OrderPage = () => {
   return (
     <>
       <Header />
-      <HomePageContent />
+      <OrderPageContent />
       <Footer />
     </>
   );
 };
-export default HomePage;
+export default OrderPage;

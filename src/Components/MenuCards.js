@@ -1,6 +1,6 @@
 const MenuCards = ({ item }) => {
   return (
-    <div className="w-[32%] bg-white flex flex-col items-center justify-around h-[450px] rounded-xl">
+    <div className="bg-white flex flex-col items-center justify-around h-[450px] rounded-xl">
       <img src={item.img} className="w-2/3" />
       <h2 className="self-start w-5/6 mx-auto font-bold text-xl text-specDimGrey">
         {item.name}

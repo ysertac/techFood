@@ -23,6 +23,7 @@ import i3 from "./Assets/adv-aseets/insta/li-2.png";
 import i4 from "./Assets/adv-aseets/insta/li-3.png";
 import i5 from "./Assets/adv-aseets/insta/li-4.png";
 import i6 from "./Assets/adv-aseets/insta/li-5.png";
+import orderBanner from "./Assets/adv-aseets/adv-form-banner.png";
 
 export const dataHomePage = {
   header: {
@@ -57,25 +58,34 @@ export const dataHomePage = {
   ],
   menuCards: [
     {
+      id: 1,
       img: terminalPizza,
       name: "Terminal Pizza",
       point: 4.9,
       dailyOrder: 200,
       price: 60,
+      description:
+        "Terminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal Terminal PizzaPizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal Pizza",
     },
     {
+      id: 2,
       img: positionAbs,
       name: "Position Absolute Acı Pizza",
       point: 4.5,
       dailyOrder: 928,
       price: 85,
+      description:
+        "Position Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı Pizza",
     },
     {
+      id: 3,
       img: useEffBrg,
       name: "useEffect Tavuklu Burger",
       point: 4.8,
       dailyOrder: 462,
       price: 75,
+      description:
+        "useEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu Burger",
     },
   ],
 };
@@ -102,4 +112,8 @@ export const dataFooter = {
     { icon: faLinkedin, path: "https://www.linkedin.com/in/sertacyildirir/" },
     { icon: faGithub, path: "https://www.github.com/ysertac/" },
   ],
+};
+
+export const dataOrderPage = {
+  banner: orderBanner,
 };
