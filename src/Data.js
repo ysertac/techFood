@@ -24,6 +24,9 @@ import i4 from "./Assets/adv-aseets/insta/li-3.png";
 import i5 from "./Assets/adv-aseets/insta/li-4.png";
 import i6 from "./Assets/adv-aseets/insta/li-5.png";
 import orderBanner from "./Assets/adv-aseets/adv-form-banner.png";
+import smallIcon from "./Assets/adv-aseets/s-solid.svg";
+import mediumIcon from "./Assets/adv-aseets/m-solid.svg";
+import largeIcon from "./Assets/adv-aseets/l-solid.svg";
 
 export const dataHomePage = {
   header: {
@@ -116,4 +119,37 @@ export const dataFooter = {
 
 export const dataOrderPage = {
   banner: orderBanner,
+  orderForm: {
+    size: [
+      {
+        id: 1,
+        name: "small",
+        icon: smallIcon,
+      },
+      {
+        id: 2,
+        name: "medium",
+        icon: mediumIcon,
+      },
+      {
+        id: 3,
+        name: "large",
+        icon: largeIcon,
+      },
+    ],
+    thickness: [
+      {
+        id: 1,
+        name: "thin",
+      },
+      {
+        id: 2,
+        name: "standart",
+      },
+      {
+        id: 3,
+        name: "thick",
+      },
+    ],
+  },
 };
