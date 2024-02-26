@@ -3,13 +3,16 @@ import {
   useParams,
 } from "react-router-dom/cjs/react-router-dom.min";
 import { dataHomePage, dataOrderPage } from "../Data";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+
 import Dropdown from "../Components/Dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { Context } from "../App";
 
 const OrderPageContent = () => {
+  const { values } = useContext(Context);
   const { id } = useParams();
   const history = useHistory();
   const item = dataHomePage.menuCards.find((item) => item.id == id);
@@ -79,11 +82,15 @@ const OrderPageContent = () => {
     }
   };
 
+  useEffect(() => {
+    values.setOrderData(formData);
+  }, [formData]);
+
   const submitHandler = () => {
     axios
       .post("https://reqres.in/api/users", formData)
       .then((res) => console.log(res.data));
-    history.push("/order");
+    history.push("/success");
   };
 
   return (
