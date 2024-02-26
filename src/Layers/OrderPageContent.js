@@ -1,13 +1,21 @@
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import {
+  useHistory,
+  useParams,
+} from "react-router-dom/cjs/react-router-dom.min";
 import { dataHomePage, dataOrderPage } from "../Data";
 import { useEffect, useState } from "react";
 import Dropdown from "../Components/Dropdown";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 const OrderPageContent = () => {
   const { id } = useParams();
+  const history = useHistory();
   const item = dataHomePage.menuCards.find((item) => item.id == id);
-  const size = document.getElementById("size");
+  const order = dataHomePage.menuCards.find((item) => item.id == id);
   const formDataInitial = {
+    order: order.name,
     size: "",
     thickness: "",
     extra: [],
@@ -32,12 +40,52 @@ const OrderPageContent = () => {
     } else if (type == "button") {
       setFormData({ ...formData, [name]: value });
       setMenuBarText(value);
+      document.getElementById("dropdownHeader").classList.add("bg-specYellow");
+      document
+        .getElementById("dropdownHeader")
+        .classList.remove("bg-specBeige");
+    } else if (type == "checkbox") {
+      const checkboxes = document.getElementsByClassName("checkboxClass");
+      if (checked) {
+        for (let i = 0; i < checkboxes.length; i++) {
+          if (checkboxes[i].id == value) {
+            checkboxes[i].classList.add("bg-specYellow");
+            checkboxes[i].classList.remove("bg-specBeige");
+            checkboxes[i]
+              .querySelector(".checkboxIcon")
+              .classList.remove("hidden");
+          }
+        }
+        const controlValue = formData[name].find((item) => item == value);
+        if (controlValue == null) {
+          setFormData({ ...formData, [name]: [...formData[name], value] });
+        }
+      } else {
+        for (let i = 0; i < checkboxes.length; i++) {
+          if (checkboxes[i].id == value) {
+            checkboxes[i].classList.remove("bg-specYellow");
+            checkboxes[i].classList.add("bg-specBeige");
+            checkboxes[i]
+              .querySelector(".checkboxIcon")
+              .classList.add("hidden");
+          }
+        }
+        const controlValue = formData[name].findIndex((item) => item == value);
+        formData[name].splice(controlValue, 1);
+        setFormData({ ...formData, [name]: formData[name] });
+      }
+    } else {
+      setFormData({ ...formData, [name]: value });
     }
   };
 
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
+  const submitHandler = () => {
+    axios
+      .post("https://reqres.in/api/users", formData)
+      .then((res) => console.log(res.data));
+    history.push("/order");
+  };
+
   return (
     <>
       <section className="bg-specBeige">
@@ -63,15 +111,15 @@ const OrderPageContent = () => {
         </div>
       </section>
       <section>
-        <form className="w-3/4 mx-auto">
-          <div className="flex justify-between">
+        <form onSubmit={submitHandler} className="w-3/4 mx-auto">
+          <div className="flex justify-between my-16">
             <div>
               <h2 className="text-xl font-bold">
                 Boyut Seç <span className="text-specRed">*</span>
               </h2>
               <div className="mt-5 flex">
                 {dataOrderPage.orderForm.size.map((size) => (
-                  <div className="relative checked:bg-specYellow mr-5">
+                  <div className="relative mr-5">
                     <input
                       type="radio"
                       role="radio"
@@ -82,7 +130,7 @@ const OrderPageContent = () => {
                     />
                     <div
                       id={size.name}
-                      className={`border-2 w-10 h-10 rounded-full flex justify-center items-center specialClass bg-specBeige`}
+                      className={`w-10 h-10 rounded-full flex justify-center items-center specialClass bg-specBeige`}
                     >
                       <img src={size.icon} className="w-2" />
                     </div>
@@ -91,7 +139,7 @@ const OrderPageContent = () => {
               </div>
             </div>
             <div className="w-1/6">
-              <h2 className="text-xl font-bold">
+              <h2 className="text-xl font-bold text-right">
                 Hamur Seç <span className="text-specRed">*</span>
               </h2>
               <Dropdown
@@ -101,6 +149,53 @@ const OrderPageContent = () => {
               />
             </div>
           </div>
+          <div className="flex w-full justify-between my-16">
+            <div className="w-[47%]">
+              <h2 className="text-xl font-bold">Extra Malzemeler</h2>
+              <div className="flex justify-between flex-wrap w-full">
+                {dataOrderPage.orderForm.extras.map((item) => (
+                  <label className="w-1/3 flex mt-5 items-center cursor-pointer">
+                    <div className="flex items-center relative">
+                      <input
+                        type="checkbox"
+                        name="extra"
+                        value={item.name}
+                        className="w-9 h-9 z-[2] opacity-0 cursor-pointer"
+                        onChange={changeHandler}
+                      />
+                      <div
+                        id={item.name}
+                        className="w-10 h-10 border-2 absolute bg-specBeige cursor-pointer checkboxClass flex justify-center items-center"
+                      >
+                        <FontAwesomeIcon
+                          icon={faCheck}
+                          className="w-5/6 h-5/6 hidden checkboxIcon"
+                        />
+                      </div>
+                    </div>
+                    <span className="pl-5 font-barlow font-semibold">
+                      {item.name}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div className="w-[47%]">
+              <h2 className="text-xl font-bold text-right">Sipariş Notu</h2>
+              <div>
+                <textarea
+                  onChange={changeHandler}
+                  name="note"
+                  className="border-2 w-full mt-5 bg-specBeige focus:bg-specYellow pt-3 pl-3 h-36"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+          <input
+            type="submit"
+            value="Sipariş ver"
+            className="bg-specDimGrey text-white text-lg font-barlow font-semibold mb-16 px-7 py-3 rounded-xl hover:bg-specYellow hover:text-specDimGrey duration-200 cursor-pointer"
+          />
         </form>
       </section>
     </>

@@ -3,6 +3,7 @@ import {
   faGithub,
   faInstagram,
   faLinkedin,
+  faCheck,
 } from "@fortawesome/free-brands-svg-icons";
 import logo from "./Assets/logo.svg";
 import all from "./Assets/adv-aseets/icons/1.svg";
@@ -149,6 +150,68 @@ export const dataOrderPage = {
       {
         id: 3,
         name: "thick",
+      },
+    ],
+    extras: [
+      {
+        id: 1,
+        name: "Pepperoni",
+      },
+      {
+        id: 2,
+        name: "Sosis",
+      },
+      {
+        id: 3,
+        name: "Kanada Jambonu",
+      },
+      {
+        id: 4,
+        name: "Tavuk Izgara",
+      },
+      {
+        id: 5,
+        name: "Soğan",
+      },
+      {
+        id: 6,
+        name: "Domates",
+      },
+      {
+        id: 7,
+        name: "Mısır",
+      },
+      {
+        id: 8,
+        name: "Sucuk",
+      },
+      {
+        id: 9,
+        name: "Jalepeno",
+      },
+      {
+        id: 10,
+        name: "Sarımsak",
+      },
+      {
+        id: 11,
+        name: "Biber",
+      },
+      {
+        id: 12,
+        name: "Salam",
+      },
+      {
+        id: 13,
+        name: "Ananas",
+      },
+      {
+        id: 14,
+        name: "Mantar",
+      },
+      {
+        id: 15,
+        name: "Zeytin",
       },
     ],
   },
