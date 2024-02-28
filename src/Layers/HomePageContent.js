@@ -2,8 +2,11 @@ import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import MenuCards from "../Components/MenuCards";
 
 import { dataHomePage } from "../Data";
+import { useContext } from "react";
+import { Context } from "../App";
 
 const HomePageContent = () => {
+  const { priceValues } = useContext(Context);
   return (
     <>
       <section
@@ -90,7 +93,11 @@ const HomePageContent = () => {
           </div>
           <div className="flex justify-between flex-wrap w-full my-16 mb-20">
             {dataHomePage.menuCards.map((item) => (
-              <NavLink className="w-[32%]" to={`/order/${item.id}`}>
+              <NavLink
+                className="w-[32%]"
+                to={`/order/${item.id}`}
+                onClick={() => priceValues.setPriceData(item.price)}
+              >
                 <MenuCards item={item} />
               </NavLink>
             ))}

@@ -10,13 +10,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { Context } from "../App";
+import { useForm } from "react-hook-form";
 
 const OrderPageContent = () => {
-  const { values } = useContext(Context);
+  const { values, priceValues } = useContext(Context);
   const { id } = useParams();
   const history = useHistory();
   const item = dataHomePage.menuCards.find((item) => item.id == id);
   const order = dataHomePage.menuCards.find((item) => item.id == id);
+  const [disabled, setDisabled] = useState(false);
   const formDataInitial = {
     order: order.name,
     size: "",
@@ -25,11 +27,23 @@ const OrderPageContent = () => {
     note: "",
   };
   const [formData, setFormData] = useState(formDataInitial);
+  const errorInit = {
+    size: "",
+    thickness: "",
+    extra: "",
+  };
+  const [validation, setValidation] = useState({
+    size: false,
+    thickness: false,
+  });
+  const [errorMessages, setErrorMessages] = useState(errorInit);
   const [menuBarText, setMenuBarText] = useState("-Hamur Kalınlığı Seç-");
+
   const changeHandler = (e) => {
     let { name, type, value, checked } = e.target;
     if (type == "radio") {
       setFormData({ ...formData, [name]: value });
+      setValidation({ ...validation, [name]: true });
       const radios = document.getElementsByClassName("specialClass");
       for (let i = 0; i < radios.length; i++) {
         if (radios[i].id == value) {
@@ -42,6 +56,7 @@ const OrderPageContent = () => {
       }
     } else if (type == "button") {
       setFormData({ ...formData, [name]: value });
+      setValidation({ ...validation, [name]: true });
       setMenuBarText(value);
       document.getElementById("dropdownHeader").classList.add("bg-specYellow");
       document
@@ -49,6 +64,22 @@ const OrderPageContent = () => {
         .classList.remove("bg-specBeige");
     } else if (type == "checkbox") {
       const checkboxes = document.getElementsByClassName("checkboxClass");
+      formData.extra.length >= 5
+        ? setValidation({ ...validation, extra: false })
+        : setValidation({ ...validation, extra: true });
+
+      /* if (formData.extra.length >= 6) {
+        for (let i = 0; i < checkboxes.length; i++) {
+          if (checkboxes[i].id == value && checked) {
+            checkboxes[i].classList.add("bg-specRed");
+            checkboxes[i].classList.remove("bg-specBeige");
+            checkboxes[i]
+              .querySelector(".checkboxIcon")
+              .classList.remove("hidden");
+          }
+        }
+      } */
+
       if (checked) {
         for (let i = 0; i < checkboxes.length; i++) {
           if (checkboxes[i].id == value) {
@@ -62,6 +93,7 @@ const OrderPageContent = () => {
         const controlValue = formData[name].find((item) => item == value);
         if (controlValue == null) {
           setFormData({ ...formData, [name]: [...formData[name], value] });
+          priceValues.setExtraPriceData(priceValues.extraPriceData + 5);
         }
       } else {
         for (let i = 0; i < checkboxes.length; i++) {
@@ -73,9 +105,13 @@ const OrderPageContent = () => {
               .classList.add("hidden");
           }
         }
-        const controlValue = formData[name].findIndex((item) => item == value);
-        formData[name].splice(controlValue, 1);
-        setFormData({ ...formData, [name]: formData[name] });
+        const controlValue = formData[name].find((item) => item == value);
+
+        setFormData({
+          ...formData,
+          [name]: [...formData[name].filter((item) => item != controlValue)],
+        });
+        priceValues.setExtraPriceData(priceValues.extraPriceData - 5);
       }
     } else {
       setFormData({ ...formData, [name]: value });
@@ -86,12 +122,65 @@ const OrderPageContent = () => {
     values.setOrderData(formData);
   }, [formData]);
 
+  useEffect(() => {
+    const checkboxInputs = document.getElementsByClassName("checkboxInput");
+    if (formData.extra.length >= 5) {
+      setErrorMessages({
+        ...errorMessages,
+        extra: "En fazla 5 adet seçebilirsiniz!",
+      });
+      for (let i = 0; i < checkboxInputs.length; i++) {
+        formData.extra.find((extra) => checkboxInputs[i].value == extra) == null
+          ? (checkboxInputs[i].disabled = true)
+          : (checkboxInputs[i].disabled = false);
+      }
+    } else {
+      setErrorMessages({
+        ...errorMessages,
+        extra: "",
+      });
+      for (let i = 0; i < checkboxInputs.length; i++) {
+        checkboxInputs[i].disabled = false;
+      }
+    }
+    console.log(formData.extra);
+  }, [formData.extra]);
+
   const submitHandler = () => {
-    axios
-      .post("https://reqres.in/api/users", formData)
-      .then((res) => console.log(res.data));
-    history.push("/success");
+    if (!validation.size || !validation.thickness) {
+      if (!validation.size && !validation.thickness) {
+        setErrorMessages({
+          ...errorMessages,
+          size: "Size is required",
+          thickness: "Thickness is required",
+        });
+      } else if (!validation.size) {
+        setErrorMessages({
+          ...errorMessages,
+          size: "Size is required",
+          thickness: "",
+        });
+      } else if (!validation.thickness) {
+        setErrorMessages({
+          ...errorMessages,
+          thickness: "Thickness is required",
+          size: "",
+        });
+      }
+    } else {
+      axios
+        .post("https://reqres.in/api/users", formData)
+        .then((res) => console.log(res.data));
+      history.push("/success");
+    }
   };
+  console.log(formData);
+  console.log(errorMessages);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   return (
     <>
@@ -118,13 +207,13 @@ const OrderPageContent = () => {
         </div>
       </section>
       <section>
-        <form onSubmit={submitHandler} className="w-3/4 mx-auto">
+        <form onSubmit={handleSubmit(submitHandler)} className="w-3/4 mx-auto">
           <div className="flex justify-between my-16">
             <div>
               <h2 className="text-xl font-bold">
                 Boyut Seç <span className="text-specRed">*</span>
               </h2>
-              <div className="mt-5 flex">
+              <div className="mt-5 flex items-center">
                 {dataOrderPage.orderForm.size.map((size) => (
                   <div className="relative mr-5">
                     <input
@@ -143,6 +232,10 @@ const OrderPageContent = () => {
                     </div>
                   </div>
                 ))}
+
+                <p id="sizeValidation" className="text-specRed font-semibold">
+                  {errorMessages.size}
+                </p>
               </div>
             </div>
             <div className="w-1/6">
@@ -154,11 +247,24 @@ const OrderPageContent = () => {
                 changeHandler={changeHandler}
                 menuBarText={menuBarText}
               />
+
+              <p
+                id="thicknessValidation"
+                className="text-specRed font-semibold"
+              >
+                {errorMessages.thickness}
+              </p>
             </div>
           </div>
-          <div className="flex w-full justify-between my-16">
+          <div className="flex w-full justify-between my-16 border-b-2 border-b-black pb-16">
             <div className="w-[47%]">
               <h2 className="text-xl font-bold">Extra Malzemeler</h2>
+              <p
+                id="thicknessValidation"
+                className="text-specRed font-semibold"
+              >
+                {errorMessages.extra}
+              </p>
               <div className="flex justify-between flex-wrap w-full">
                 {dataOrderPage.orderForm.extras.map((item) => (
                   <label className="w-1/3 flex mt-5 items-center cursor-pointer">
@@ -166,8 +272,9 @@ const OrderPageContent = () => {
                       <input
                         type="checkbox"
                         name="extra"
+                        id={item.id}
                         value={item.name}
-                        className="w-9 h-9 z-[2] opacity-0 cursor-pointer"
+                        className="w-9 h-9 z-[2] opacity-0 cursor-pointer checkboxInput"
                         onChange={changeHandler}
                       />
                       <div
@@ -198,11 +305,39 @@ const OrderPageContent = () => {
               </div>
             </div>
           </div>
-          <input
-            type="submit"
-            value="Sipariş ver"
-            className="bg-specDimGrey text-white text-lg font-barlow font-semibold mb-16 px-7 py-3 rounded-xl hover:bg-specYellow hover:text-specDimGrey duration-200 cursor-pointer"
-          />
+          <div className="flex mx-auto justify-evenly items-center">
+            <div className="">
+              <button className="bg-specBeige text-xl font-semibold p-5 rounded-l-full hover:text-specRed">
+                -
+              </button>
+              <span className="bg-specBeige text-xl font-semibold p-5">1</span>
+              <button className="bg-specBeige text-xl font-semibold p-5 rounded-r-full hover:text-specRed">
+                +
+              </button>
+            </div>
+            <div>
+              <div className="text-specDimGrey bg-specBeige border-2 rounded-t-lg w-80 h-40 p-5">
+                <h2 className="capitalize font-semibold text-lg">
+                  sipariş toplamı
+                </h2>
+                <div className="flex justify-between pt-5 font-medium">
+                  <span>Seçimler:</span>
+                  <span>{priceValues.extraPriceData}₺</span>
+                </div>
+                <div className="flex justify-between pt-5 font-semibold text-specRed">
+                  <span>Toplam:</span>
+                  <span>{`${
+                    priceValues.priceData + priceValues.extraPriceData
+                  }₺`}</span>
+                </div>
+              </div>
+              <input
+                type="submit"
+                value="Sipariş ver"
+                className="bg-specYellow text-specDimGrey text-lg font-barlow font-semibold mb-16 px-7 py-3 rounded-b-xl w-80 hover:bg-specDimGrey hover:text-specYellow duration-200 cursor-pointer"
+              />
+            </div>
+          </div>
         </form>
       </section>
     </>

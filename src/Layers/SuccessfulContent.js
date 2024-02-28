@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Context } from "../App";
 
 const SuccessfulContent = () => {
-  const { values } = useContext(Context);
+  const { values, priceValues } = useContext(Context);
   return (
     <>
       <section className="bg-specRed">
@@ -44,11 +44,11 @@ const SuccessfulContent = () => {
             <h2 className="capitalize">sipariş toplamı</h2>
             <div className="flex justify-between pt-5">
               <span>Seçimler:</span>
-              <span>25₺</span>
+              <span>{priceValues.extraPriceData}₺</span>
             </div>
             <div className="flex justify-between pt-5">
               <span>Toplam:</span>
-              <span>110₺</span>
+              <span>{priceValues.priceData + priceValues.extraPriceData}₺</span>
             </div>
           </div>
         </div>

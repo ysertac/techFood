@@ -123,94 +123,94 @@ export const dataOrderPage = {
   orderForm: {
     size: [
       {
-        id: 1,
+        id: "s1",
         name: "small",
         icon: smallIcon,
       },
       {
-        id: 2,
+        id: "s2",
         name: "medium",
         icon: mediumIcon,
       },
       {
-        id: 3,
+        id: "s3",
         name: "large",
         icon: largeIcon,
       },
     ],
     thickness: [
       {
-        id: 1,
+        id: "t1",
         name: "thin",
       },
       {
-        id: 2,
+        id: "t2",
         name: "standart",
       },
       {
-        id: 3,
+        id: "t3",
         name: "thick",
       },
     ],
     extras: [
       {
-        id: 1,
+        id: "e1",
         name: "Pepperoni",
       },
       {
-        id: 2,
+        id: "e2",
         name: "Sosis",
       },
       {
-        id: 3,
+        id: "e3",
         name: "Kanada Jambonu",
       },
       {
-        id: 4,
+        id: "e4",
         name: "Tavuk Izgara",
       },
       {
-        id: 5,
+        id: "e5",
         name: "Soğan",
       },
       {
-        id: 6,
+        id: "e6",
         name: "Domates",
       },
       {
-        id: 7,
+        id: "e7",
         name: "Mısır",
       },
       {
-        id: 8,
+        id: "e8",
         name: "Sucuk",
       },
       {
-        id: 9,
+        id: "e9",
         name: "Jalepeno",
       },
       {
-        id: 10,
+        id: "e10",
         name: "Sarımsak",
       },
       {
-        id: 11,
+        id: "e11",
         name: "Biber",
       },
       {
-        id: 12,
+        id: "e12",
         name: "Salam",
       },
       {
-        id: 13,
+        id: "e13",
         name: "Ananas",
       },
       {
-        id: 14,
+        id: "e14",
         name: "Mantar",
       },
       {
-        id: 15,
+        id: "e15",
         name: "Zeytin",
       },
     ],
