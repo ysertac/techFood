@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { Context } from "../App";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 
 const OrderPageContent = () => {
   const { values, priceValues } = useContext(Context);
@@ -25,6 +25,7 @@ const OrderPageContent = () => {
     thickness: "",
     extra: [],
     note: "",
+    number: 1,
   };
   const [formData, setFormData] = useState(formDataInitial);
   const errorInit = {
@@ -94,6 +95,9 @@ const OrderPageContent = () => {
         if (controlValue == null) {
           setFormData({ ...formData, [name]: [...formData[name], value] });
           priceValues.setExtraPriceData(priceValues.extraPriceData + 5);
+          priceValues.setTotalExtraPriceData(
+            formData.number * priceValues.extraPriceData + 5 * formData.number
+          );
         }
       } else {
         for (let i = 0; i < checkboxes.length; i++) {
@@ -112,6 +116,9 @@ const OrderPageContent = () => {
           [name]: [...formData[name].filter((item) => item != controlValue)],
         });
         priceValues.setExtraPriceData(priceValues.extraPriceData - 5);
+        priceValues.setTotalExtraPriceData(
+          formData.number * priceValues.extraPriceData - 5 * formData.number
+        );
       }
     } else {
       setFormData({ ...formData, [name]: value });
@@ -120,7 +127,15 @@ const OrderPageContent = () => {
 
   useEffect(() => {
     values.setOrderData(formData);
+    console.log(priceValues.extraPriceData);
   }, [formData]);
+
+  useEffect(() => {
+    priceValues.setTotalPriceData(priceValues.priceData * formData.number);
+    priceValues.setTotalExtraPriceData(
+      priceValues.extraPriceData * formData.number
+    );
+  }, [formData.number]);
 
   useEffect(() => {
     const checkboxInputs = document.getElementsByClassName("checkboxInput");
@@ -181,6 +196,16 @@ const OrderPageContent = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const add = () => {
+    setFormData({ ...formData, number: formData.number + 1 });
+  };
+
+  const remove = () => {
+    if (formData.number > 1) {
+      setFormData({ ...formData, number: formData.number - 1 });
+    }
+  };
 
   return (
     <>
@@ -307,11 +332,20 @@ const OrderPageContent = () => {
           </div>
           <div className="flex mx-auto justify-evenly items-center">
             <div className="">
-              <button className="bg-specBeige text-xl font-semibold p-5 rounded-l-full hover:text-specRed">
+              <button
+                disabled={formData.number == 1}
+                className="bg-specBeige text-xl font-semibold p-5 rounded-l-full hover:text-specRed"
+                onClick={remove}
+              >
                 -
               </button>
-              <span className="bg-specBeige text-xl font-semibold p-5">1</span>
-              <button className="bg-specBeige text-xl font-semibold p-5 rounded-r-full hover:text-specRed">
+              <span className="bg-specBeige text-xl font-semibold p-5">
+                {formData.number}
+              </span>
+              <button
+                className="bg-specBeige text-xl font-semibold p-5 rounded-r-full hover:text-specRed"
+                onClick={add}
+              >
                 +
               </button>
             </div>
@@ -322,12 +356,12 @@ const OrderPageContent = () => {
                 </h2>
                 <div className="flex justify-between pt-5 font-medium">
                   <span>Seçimler:</span>
-                  <span>{priceValues.extraPriceData}₺</span>
+                  <span>{priceValues.totalExtraPriceData}₺</span>
                 </div>
                 <div className="flex justify-between pt-5 font-semibold text-specRed">
                   <span>Toplam:</span>
                   <span>{`${
-                    priceValues.priceData + priceValues.extraPriceData
+                    priceValues.totalPriceData + priceValues.totalExtraPriceData
                   }₺`}</span>
                 </div>
               </div>

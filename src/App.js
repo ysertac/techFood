@@ -10,6 +10,8 @@ export const ContextProvider = ({ children }) => {
   const [orderData, setOrderData] = useState({});
   const [priceData, setPriceData] = useState(0);
   const [extraPriceData, setExtraPriceData] = useState(0);
+  const [totalExtraPriceData, setTotalExtraPriceData] = useState(0);
+  const [totalPriceData, setTotalPriceData] = useState(0);
   const values = {
     orderData,
     setOrderData,
@@ -19,6 +21,10 @@ export const ContextProvider = ({ children }) => {
     setPriceData,
     extraPriceData,
     setExtraPriceData,
+    totalExtraPriceData,
+    setTotalExtraPriceData,
+    totalPriceData,
+    setTotalPriceData,
   };
   return (
     <Context.Provider value={{ values, priceValues }}>
