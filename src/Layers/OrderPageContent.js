@@ -332,22 +332,22 @@ const OrderPageContent = () => {
           </div>
           <div className="flex mx-auto justify-evenly items-center">
             <div className="">
-              <button
+              <span
                 disabled={formData.number == 1}
-                className="bg-specBeige text-xl font-semibold p-5 rounded-l-full hover:text-specRed"
+                className="bg-specBeige text-xl font-semibold p-5 rounded-l-full hover:text-specRed cursor-pointer"
                 onClick={remove}
               >
                 -
-              </button>
+              </span>
               <span className="bg-specBeige text-xl font-semibold p-5">
                 {formData.number}
               </span>
-              <button
-                className="bg-specBeige text-xl font-semibold p-5 rounded-r-full hover:text-specRed"
+              <span
+                className="bg-specBeige text-xl font-semibold p-5 rounded-r-full hover:text-specRed cursor-pointer"
                 onClick={add}
               >
                 +
-              </button>
+              </span>
             </div>
             <div>
               <div className="text-specDimGrey bg-specBeige border-2 rounded-t-lg w-80 h-40 p-5">

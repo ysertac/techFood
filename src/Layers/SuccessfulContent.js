@@ -44,11 +44,13 @@ const SuccessfulContent = () => {
             <h2 className="capitalize">sipariş toplamı</h2>
             <div className="flex justify-between pt-5">
               <span>Seçimler:</span>
-              <span>{priceValues.extraPriceData}₺</span>
+              <span>{priceValues.totalExtraPriceData}₺</span>
             </div>
             <div className="flex justify-between pt-5">
               <span>Toplam:</span>
-              <span>{priceValues.priceData + priceValues.extraPriceData}₺</span>
+              <span>
+                {priceValues.totalPriceData + priceValues.totalExtraPriceData}₺
+              </span>
             </div>
           </div>
         </div>
