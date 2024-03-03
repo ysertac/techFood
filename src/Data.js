@@ -52,7 +52,7 @@ export const dataHomePage = {
       img: fries,
     },
     {
-      name: "Fast Food",
+      name: window.innerWidth <= 500 ? "F. Food" : "Fast Food",
       img: fastFood,
     },
     {

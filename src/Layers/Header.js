@@ -5,7 +5,10 @@ const Header = () => {
   return (
     <header className="bg-specRed flex justify-center items-center py-8">
       <NavLink to="/">
-        <img src={dataHomePage.header.img} />
+        <img
+          src={dataHomePage.header.img}
+          className="max-mobile:w-4/5 mx-auto"
+        />
       </NavLink>
     </header>
   );

@@ -15,6 +15,9 @@ module.exports = {
         specRed: "#CE2829",
         specBeige: "#FAF7F2",
       },
+      screens: {
+        mobile: "500px",
+      },
     },
   },
   plugins: [],
