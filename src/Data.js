@@ -69,7 +69,7 @@ export const dataHomePage = {
       dailyOrder: 200,
       price: 60,
       description:
-        "Terminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal Terminal PizzaPizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal Pizza",
+        "Terminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal Terminal PizzaPizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal PizzaTerminal ",
     },
     {
       id: 2,
@@ -79,7 +79,7 @@ export const dataHomePage = {
       dailyOrder: 928,
       price: 85,
       description:
-        "Position Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı Pizza",
+        "Position Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı PizzaPosition Absolute Acı ",
     },
     {
       id: 3,
@@ -89,7 +89,7 @@ export const dataHomePage = {
       dailyOrder: 462,
       price: 75,
       description:
-        "useEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu Burger",
+        "useEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect Tavuklu BurgeruseEffect ",
     },
   ],
 };

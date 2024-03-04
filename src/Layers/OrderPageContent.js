@@ -210,7 +210,7 @@ const OrderPageContent = () => {
   return (
     <>
       <section className="bg-specBeige">
-        <div className="w-3/4 mx-auto">
+        <div className="w-3/4 max-mobile:w-11/12 mx-auto">
           <img src={dataOrderPage.banner} className="mx-auto" />
           <p className="text-lg text-specDimGrey font-barlow font-semibold pt-10">
             Anasayfa - Seçenekler -{" "}
@@ -226,15 +226,18 @@ const OrderPageContent = () => {
               <div>{"(" + item.dailyOrder + ")"}</div>
             </div>
           </div>
-          <p className="w-2/3 pt-10 text-specDimGrey text-lg font-barlow font-semibold text-justify pb-10">
+          <p className="w-2/3 max-mobile:w-full pt-10 text-specDimGrey text-lg font-barlow font-semibold text-justify pb-10 max-mobile:text-sm">
             {item.description}
           </p>
         </div>
       </section>
       <section>
-        <form onSubmit={handleSubmit(submitHandler)} className="w-3/4 mx-auto">
-          <div className="flex justify-between my-16">
-            <div>
+        <form
+          onSubmit={handleSubmit(submitHandler)}
+          className="w-3/4 max-mobile:w-11/12 mx-auto"
+        >
+          <div className="flex max-mobile:w-full justify-between items-center my-16">
+            <div className="max-mobile:w-[45%]">
               <h2 className="text-xl font-bold">
                 Boyut Seç <span className="text-specRed">*</span>
               </h2>
@@ -257,13 +260,15 @@ const OrderPageContent = () => {
                     </div>
                   </div>
                 ))}
-
-                <p id="sizeValidation" className="text-specRed font-semibold">
-                  {errorMessages.size}
-                </p>
               </div>
+              <p
+                id="sizeValidation"
+                className="text-specRed font-semibold pt-5"
+              >
+                {errorMessages.size}
+              </p>
             </div>
-            <div className="w-1/6">
+            <div className="w-1/6 max-mobile:w-[45%]">
               <h2 className="text-xl font-bold text-right">
                 Hamur Seç <span className="text-specRed">*</span>
               </h2>
@@ -275,14 +280,14 @@ const OrderPageContent = () => {
 
               <p
                 id="thicknessValidation"
-                className="text-specRed font-semibold"
+                className="text-specRed font-semibold pt-5"
               >
                 {errorMessages.thickness}
               </p>
             </div>
           </div>
-          <div className="flex w-full justify-between my-16 border-b-2 border-b-black pb-16">
-            <div className="w-[47%]">
+          <div className="flex w-full max-mobile:flex-col justify-between my-16 border-b-2 border-b-black pb-16">
+            <div className="w-[47%] max-mobile:w-full">
               <h2 className="text-xl font-bold">Extra Malzemeler</h2>
               <p
                 id="thicknessValidation"
@@ -312,15 +317,17 @@ const OrderPageContent = () => {
                         />
                       </div>
                     </div>
-                    <span className="pl-5 font-barlow font-semibold">
+                    <span className="pl-5 max-mobile:pl-2 font-barlow font-semibold max-mobile:text-[85%]">
                       {item.name}
                     </span>
                   </label>
                 ))}
               </div>
             </div>
-            <div className="w-[47%]">
-              <h2 className="text-xl font-bold text-right">Sipariş Notu</h2>
+            <div className="w-[47%] max-mobile:mt-10 max-mobile:w-full">
+              <h2 className="text-xl font-bold text-right max-mobile:text-left">
+                Sipariş Notu
+              </h2>
               <div>
                 <textarea
                   onChange={changeHandler}
@@ -330,7 +337,7 @@ const OrderPageContent = () => {
               </div>
             </div>
           </div>
-          <div className="flex mx-auto justify-evenly items-center">
+          <div className="flex max-mobile:flex-col max-mobile:justify-between max-mobile:h-96 mx-auto justify-evenly items-center">
             <div className="">
               <span
                 disabled={formData.number == 1}

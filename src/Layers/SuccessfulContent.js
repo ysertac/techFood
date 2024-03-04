@@ -6,7 +6,7 @@ const SuccessfulContent = () => {
   return (
     <>
       <section className="bg-specRed">
-        <div className="w-1/4 mx-auto text-center border-b-2 text-white py-5">
+        <div className="w-1/4 max-mobile:w-11/12 mx-auto text-center border-b-2 text-white py-5">
           <p className="font-satisfy text-specYellow text-2xl font-medium">
             lezzetin yolda
           </p>
@@ -16,11 +16,11 @@ const SuccessfulContent = () => {
         </div>
       </section>
       <section className="bg-specRed pb-28">
-        <div className="w-2/3 mx-auto pt-5 flex flex-col justify-between items-center h-[570px]">
+        <div className="w-2/3 max-mobile:w-11/12 mx-auto pt-5 flex flex-col justify-between items-center h-[570px]">
           <h2 className="capitalize text-white text-lg font-semibold">
             {values.orderData?.order}
           </h2>
-          <div className="text-white text-md flex flex-col h-2/5 w-[500px] justify-between items-left">
+          <div className="text-white text-md flex flex-col h-2/5 w-[500px] max-mobile:w-4/5 justify-between items-left">
             <div className="">
               <span className="font-light">Boyut: </span>
               <span>{values.orderData?.size}</span>
