@@ -13,7 +13,7 @@ const Dropdown = ({ items, changeHandler, menuBarText }) => {
       <div>
         <Menu.Button
           id="dropdownHeader"
-          className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-specBeige px-8 max-mobile:px-2 py-2 max-mobile:py-4 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+          className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-specBeige px-8 max-mobile:px-2 py-2 max-mobile:text-[80%] text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
         >
           {menuBarText}
           <ChevronDownIcon

@@ -219,9 +219,11 @@ const OrderPageContent = () => {
           <h2 className="text-xl text-specDimGrey font-barlow font-semibold pt-10">
             {item.name}
           </h2>
-          <div className="flex justify-between pt-10 items-center">
-            <div className="text-4xl font-bold">{item.price}₺</div>
-            <div className="flex w-1/6 justify-between text-specLightGrey text-xl font-bold">
+          <div className="flex max-mobile:w-full justify-between pt-10 items-center">
+            <div className="text-4xl max-mobile:text-3xl max-mobile:w-1/2 font-bold">
+              {item.price}₺
+            </div>
+            <div className="flex w-1/6 max-mobile:w-1/2 items-center justify-between text-specLightGrey text-xl font-bold">
               <div>{item.point}</div>
               <div>{"(" + item.dailyOrder + ")"}</div>
             </div>
@@ -236,8 +238,8 @@ const OrderPageContent = () => {
           onSubmit={handleSubmit(submitHandler)}
           className="w-3/4 max-mobile:w-11/12 mx-auto"
         >
-          <div className="flex max-mobile:w-full justify-between items-center my-16">
-            <div className="max-mobile:w-[45%]">
+          <div className="flex max-mobile:w-full max-mobile:h-60 max-mobile:flex-col justify-between items-start mobile:my-16 max-mobile:mt-16">
+            <div className="max-mobile:w-full">
               <h2 className="text-xl font-bold">
                 Boyut Seç <span className="text-specRed">*</span>
               </h2>
@@ -268,8 +270,8 @@ const OrderPageContent = () => {
                 {errorMessages.size}
               </p>
             </div>
-            <div className="w-1/6 max-mobile:w-[45%]">
-              <h2 className="text-xl font-bold text-right">
+            <div className="w-1/6 max-mobile:w-2/3">
+              <h2 className="text-xl font-bold text-right max-mobile:text-left">
                 Hamur Seç <span className="text-specRed">*</span>
               </h2>
               <Dropdown
@@ -286,7 +288,7 @@ const OrderPageContent = () => {
               </p>
             </div>
           </div>
-          <div className="flex w-full max-mobile:flex-col justify-between my-16 border-b-2 border-b-black pb-16">
+          <div className="flex w-full max-mobile:flex-col justify-between mobile:my-16 max-mobile:mt-8 border-b-2 border-b-black pb-16">
             <div className="w-[47%] max-mobile:w-full">
               <h2 className="text-xl font-bold">Extra Malzemeler</h2>
               <p
@@ -337,7 +339,7 @@ const OrderPageContent = () => {
               </div>
             </div>
           </div>
-          <div className="flex max-mobile:flex-col max-mobile:justify-between max-mobile:h-96 mx-auto justify-evenly items-center">
+          <div className="flex max-mobile:flex-col max-mobile:justify-between max-mobile:h-96 max-mobile:mt-16 mx-auto justify-evenly items-center">
             <div className="">
               <span
                 disabled={formData.number == 1}
