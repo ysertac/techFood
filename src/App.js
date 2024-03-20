@@ -3,7 +3,10 @@ import "./App.css";
 import HomePage from "./Pages/HomePage";
 import OrderPage from "./Pages/OrderPage";
 import Successful from "./Pages/Successful";
+import Work from "./Deneme/Work";
+import "react-toastify/dist/ReactToastify.css";
 import { createContext, useState } from "react";
+import LoginPage from "./Pages/LoginPage";
 
 export const Context = createContext({});
 export const ContextProvider = ({ children }) => {
@@ -47,6 +50,12 @@ function App() {
             </Route>
             <Route exact path="/success">
               <Successful />
+            </Route>
+            <Route exact path="/admin">
+              <Work />
+            </Route>
+            <Route exact path="/login">
+              <LoginPage />
             </Route>
           </Switch>
         </BrowserRouter>

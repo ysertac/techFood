@@ -1,7 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { dataFooter } from "../Data";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const Footer = () => {
+  const lsKeyUsername = "username";
+  const lsKeyPassword = "password";
+
   return (
     <footer className="bg-specDimGrey">
       <div className="w-3/4 max-mobile:w-11/12 mx-auto flex max-mobile:flex-col justify-between">
@@ -50,10 +54,18 @@ const Footer = () => {
         </div>
       </div>
       <div className="border-t mt-10"></div>
-      <div className="w-3/4 mx-auto pt-5 pb-7 flex justify-between items-center max-mobile:flex-col">
-        <p className="text-white pt-5 max-mobile:pb-7 text-lg">
-          &copy; 2023 tüm hakları saklıdır.
-        </p>
+      <div className="w-3/4 mx-auto pt-5 pb-7 flex justify-between items-center max-mobile:flex-col max-mobile:w-11/12">
+        <div className="flex justify-between max-mobile:w-full w-5/6 items-center">
+          <p className="text-white pt-5 max-mobile:pb-7 text-lg">
+            &copy; 2023 tüm hakları saklıdır.
+          </p>
+          <Link
+            to={localStorage.getItem(lsKeyUsername) ? "/admin" : "/login"}
+            className="text-white pt-5 max-mobile:pb-7 text-lg items-center"
+          >
+            Admin Paneli
+          </Link>
+        </div>
         <div className="text-white w-1/12 flex justify-between text-[21px] max-mobile:w-full">
           {dataFooter.social.map((item) => (
             <a

@@ -2,14 +2,28 @@ import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import MenuCards from "../Components/MenuCards";
 
 import { dataHomePage } from "../Data";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Context } from "../App";
+import { ToastContainer, toast } from "react-toastify";
 
 const HomePageContent = () => {
   const { priceValues } = useContext(Context);
+  const welcome = () => toast("Welcome");
+  useEffect(() => {
+    welcome();
+  }, []);
 
   return (
     <>
+      <ToastContainer
+        autoClose={1500}
+        hideProgressBar={true}
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <section
         className={
           "bg-[url('/src/Assets/mvp-banner.png')] h-[90vh] flex flex-col items-center pt-1 text-center bg-cover bg-center"

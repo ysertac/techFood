@@ -3,7 +3,6 @@ import {
   faGithub,
   faInstagram,
   faLinkedin,
-  faCheck,
 } from "@fortawesome/free-brands-svg-icons";
 import logo from "./Assets/logo.svg";
 import all from "./Assets/adv-aseets/icons/1.svg";
