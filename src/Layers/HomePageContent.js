@@ -2,17 +2,28 @@ import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import MenuCards from "../Components/MenuCards";
 
 import { dataHomePage } from "../Data";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Context } from "../App";
 import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
 
 const HomePageContent = () => {
   const { priceValues } = useContext(Context);
   const welcome = () => toast("Welcome");
+  const [products, setProducts] = useState([]);
   useEffect(() => {
+    axios
+      .get("https://techfood.up.railway.app/techfood/food", {
+        auth: {
+          username: "generalUser",
+          password: "generalUser",
+        },
+      })
+      .then((res) => setProducts(res.data));
+
     welcome();
   }, []);
-
+  console.log(products);
   return (
     <>
       <ToastContainer
@@ -119,7 +130,7 @@ const HomePageContent = () => {
             ))}
           </div>
           <div className="flex justify-between flex-wrap w-full my-16 mb-20 max-mobile:h-[1500px] content-between">
-            {dataHomePage.menuCards.map((item) => (
+            {products.map((item) => (
               <NavLink
                 className="mobile:w-[32%] max-mobile:w-full"
                 to={`/order/${item.id}`}

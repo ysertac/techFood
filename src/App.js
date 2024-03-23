@@ -7,6 +7,7 @@ import Work from "./Deneme/Work";
 import "react-toastify/dist/ReactToastify.css";
 import { createContext, useState } from "react";
 import LoginPage from "./Pages/LoginPage";
+import RegisterPage from "./Pages/RegisterPage";
 
 export const Context = createContext({});
 export const ContextProvider = ({ children }) => {
@@ -56,6 +57,9 @@ function App() {
             </Route>
             <Route exact path="/login">
               <LoginPage />
+            </Route>
+            <Route exact path="/signup">
+              <RegisterPage />
             </Route>
           </Switch>
         </BrowserRouter>

@@ -33,14 +33,14 @@ const LoginPageContent = () => {
     if (status == 200) {
       localStorage.setItem(lsKeyUsername, formDataLogin.username);
       localStorage.setItem(lsKeyPassword, formDataLogin.password);
-      history.push("/admin");
+      history.push("/");
     }
   }, [status]);
   console.log(formDataLogin);
   return (
     <>
       <form className="" onSubmit={submitHandlerLogin}>
-        <div className="w-1/5 max-mobile:w-11/12 h-[31.5016vh] flex flex-col mx-auto justify-around">
+        <div className="w-1/5 max-mobile:w-11/12 h-[35vh] flex flex-col mx-auto justify-around">
           <label className="block text-sm font-medium leading-6 text-gray-900">
             <p>Username</p>
             <div className="relative mt-2 rounded-md shadow-sm">

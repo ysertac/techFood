@@ -1,8 +1,5 @@
-import {
-  useHistory,
-  useParams,
-} from "react-router-dom/cjs/react-router-dom.min";
-import { dataHomePage, dataOrderPage } from "../Data";
+import { useHistory, useParams } from "react-router-dom";
+import { dataOrderPage } from "../Data";
 import { useContext, useEffect, useState } from "react";
 
 import Dropdown from "../Components/Dropdown";
@@ -10,17 +7,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { Context } from "../App";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 const OrderPageContent = () => {
   const { values, priceValues } = useContext(Context);
+  const [product, setProduct] = useState({});
+  const [extras, setExtras] = useState([]);
   const { id } = useParams();
   const history = useHistory();
-  const item = dataHomePage.menuCards.find((item) => item.id == id);
-  const order = dataHomePage.menuCards.find((item) => item.id == id);
-  const [disabled, setDisabled] = useState(false);
   const formDataInitial = {
-    order: order.name,
+    order: "",
     size: "",
     thickness: "",
     extra: [],
@@ -69,18 +65,6 @@ const OrderPageContent = () => {
         ? setValidation({ ...validation, extra: false })
         : setValidation({ ...validation, extra: true });
 
-      /* if (formData.extra.length >= 6) {
-        for (let i = 0; i < checkboxes.length; i++) {
-          if (checkboxes[i].id == value && checked) {
-            checkboxes[i].classList.add("bg-specRed");
-            checkboxes[i].classList.remove("bg-specBeige");
-            checkboxes[i]
-              .querySelector(".checkboxIcon")
-              .classList.remove("hidden");
-          }
-        }
-      } */
-
       if (checked) {
         for (let i = 0; i < checkboxes.length; i++) {
           if (checkboxes[i].id == value) {
@@ -126,8 +110,31 @@ const OrderPageContent = () => {
   };
 
   useEffect(() => {
+    axios
+      .get("https://techfood.up.railway.app/techfood/food/" + id, {
+        auth: {
+          username: "generalUser",
+          password: "generalUser",
+        },
+      })
+      .then((res) => setProduct(res.data));
+
+    axios
+      .get("https://techfood.up.railway.app/techfood/extra", {
+        auth: {
+          username: "generalUser",
+          password: "generalUser",
+        },
+      })
+      .then((res) => setExtras(res.data));
+  }, []);
+
+  useEffect(() => {
+    setFormData({ ...formData, order: product.name });
+  }, [product]);
+
+  useEffect(() => {
     values.setOrderData(formData);
-    console.log(priceValues.extraPriceData);
   }, [formData]);
 
   useEffect(() => {
@@ -158,7 +165,6 @@ const OrderPageContent = () => {
         checkboxInputs[i].disabled = false;
       }
     }
-    console.log(formData.extra);
   }, [formData.extra]);
 
   const submitHandler = () => {
@@ -189,8 +195,7 @@ const OrderPageContent = () => {
       history.push("/success");
     }
   };
-  console.log(formData);
-  console.log(errorMessages);
+
   const {
     register,
     handleSubmit,
@@ -217,19 +222,19 @@ const OrderPageContent = () => {
             <span className="text-specRed">Sipariş Oluştur</span>
           </p>
           <h2 className="text-xl text-specDimGrey font-barlow font-semibold pt-10">
-            {item.name}
+            {product?.name}
           </h2>
           <div className="flex max-mobile:w-full justify-between pt-10 items-center">
             <div className="text-4xl max-mobile:text-3xl max-mobile:w-1/2 font-bold">
-              {item.price}₺
+              {product?.price}₺
             </div>
             <div className="flex w-1/6 max-mobile:w-1/2 items-center justify-between text-specLightGrey text-xl font-bold">
-              <div>{item.point}</div>
-              <div>{"(" + item.dailyOrder + ")"}</div>
+              <div>{product?.point}</div>
+              <div>{"(" + product?.dailyOrder + ")"}</div>
             </div>
           </div>
           <p className="w-2/3 max-mobile:w-full pt-10 text-specDimGrey text-lg font-barlow font-semibold text-justify pb-10 max-mobile:text-sm">
-            {item.description}
+            {product?.description}
           </p>
         </div>
       </section>
@@ -298,7 +303,7 @@ const OrderPageContent = () => {
                 {errorMessages.extra}
               </p>
               <div className="flex justify-between flex-wrap w-full">
-                {dataOrderPage.orderForm.extras.map((item) => (
+                {extras?.map((item) => (
                   <label className="w-1/3 flex mt-5 items-center cursor-pointer">
                     <div className="flex items-center relative">
                       <input
