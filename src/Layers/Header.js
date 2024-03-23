@@ -13,7 +13,7 @@ const Header = () => {
         />
       </Link>
       {localStorage.getItem(lsKeyUsername) != null ? (
-        <div className="flex justify-between w-1/12 max-mobile:w-3/5">
+        <div className="flex justify-between w-1/6 max-mobile:w-3/5">
           <p className="text-white text-lg">
             {"Welcome " + localStorage.getItem(lsKeyUsername)}
           </p>
